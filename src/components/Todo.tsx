@@ -1,17 +1,31 @@
 import React from "react";
-import { Text, View } from "react-native";
+import { Button, Text, View } from "react-native";
 
-type TodoProps = {
+export type TodoItem = {
   id: number;
   title: string;
 };
 
-const Todo = ({ id, title }: TodoProps) => {
+type TodoProps = TodoItem & {
+  removeTodo: (x: number) => void;
+};
+
+const Todo = ({ id, title, removeTodo }: TodoProps) => {
+  // const handleRemove = () => {
+  //   removeTodo();
+  // };
   return (
-    <View>
-      <Text>
-        id: {id} {title}
-      </Text>
+    <View style={{ flexDirection: "row", padding: 10 }}>
+      <View style={{ flex: 1 }}>
+        <View style={{ flex: 1 }}>
+          <Text>
+            id: {id} {title}
+          </Text>
+        </View>
+      </View>
+      <View style={{ width: 30 }}>
+        <Button title="X" onPress={() => removeTodo(id)} />
+      </View>
     </View>
   );
 };
